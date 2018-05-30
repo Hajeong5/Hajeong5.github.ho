@@ -1,5 +1,14 @@
 <h1>New Post</h1>
 
+
+
 <%= render 'form', post: @post %>
 
-<%= link_to 'Back', posts_path %>
+
+<!--<button type="button" class="btn btn-secondary btn-sm" >Back</button>-->
+
+
+
+<%#= link_to 'Back', posts_path, :class => "btn btn-secondary btn-sm"  %>
+
+<%= button_to 'Back', "/", class: "btn btn-secondary btn-sm", style: "margin-top: 10px; width: 77px; height: 38px; margin-left: 10px; font-size: 16px;", method: "get"%>
