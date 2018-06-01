@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :posts
+  # resources  posts
   root 'home#index'
   
   get 'mypage' => 'posts#mypage'
   post 'search' => 'posts#search'
+  
+  get 'calender' => 'calender#index'
+  get 'option' => 'option#index'
+  get 'share' => 'share#index'
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

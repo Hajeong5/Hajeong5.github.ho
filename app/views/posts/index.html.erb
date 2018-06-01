@@ -33,7 +33,7 @@
     margin-left: 10px;
   }
   p.card-text {
-    font-size: 20px;
+    font-size: 18px;
     height: auto;
   }
   
@@ -69,7 +69,7 @@
   
   <h1 style= "float: left">INDEX</h1><%= link_to image_tag("computer.png"), new_post_path, class: "image_button"%>
   <% if user_signed_in? %>
-    <div style = "float: right; font-size: 1rem;"><a href='/posts' class="user_email"><%=current_user.email%></a> 님 환영합니다&nbsp&nbsp&nbsp<%= link_to "로그아웃", destroy_user_session_path, method: :delete, :class => "btn btn-secondary logout", data: { confirm: "로그아웃 하시겠습니까?" } %></div>
+    <div style = "float: right; font-size: 1rem;"><a href='/mypage' class="user_email"><%=current_user.email%></a> 님 환영합니다&nbsp&nbsp&nbsp<%= link_to "로그아웃", destroy_user_session_path, method: :delete, :class => "btn btn-secondary logout", data: { confirm: "로그아웃 하시겠습니까?" } %></div>
   <% else %>
     <%= link_to "로그인", new_user_session_path, :class => "btn btn-secondary" , style: "float: right"%>
   <% end %>
@@ -82,15 +82,17 @@
         <th scope="col">제목</th>
       </tr>
     </thead>
-    <tbody><% @pages.each do |post| %>
-          
+    <tbody>
+      <% @pages.each do |post| %>
         
-      <tr>
-        <th scope="row"><%= post.id%></th>
-          
-        <td><%= link_to post.title, post, :class => "btn", style: "color: #333333" %></td>
-        
-      </tr>
+        <% unless post.lock == true %>
+          <tr>
+            <th scope="row"><%= post.id%></th>
+              
+            <td><%= link_to post.title, post, :class => "btn", style: "color: #333333" %></td>
+            
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
@@ -108,16 +110,20 @@
 <%unless @random.text.nil?%>
 <div class="card text-center" style="border: 0px;">
   <div class="card-header">
-    당신을 찾아온 글
+    랜덤 메모 보기
   </div>
   <div class="card-body">
     
     <br>
-    
-    <p class="card-text"><%= @random.text.slice!(10..-1) %></p>
+    <%if #@random.text.length > 10%>
+      <p class="card-text"><%= @random.text.slice! (0..10) %> ....</p>
+    <%else%>
+      <p class="card-text"><%= @random.text %></p>
+    <%end%>
     <br>
     <%=link_to "메모보기", @random, class: "btn btn-primary"%>
   </div>
 </div>
 <% end %>
-<%= paginate @pages %>
+<br>
+<div class="page offset-md-4" style = "clear: both;"><%= paginate @pages %></div>

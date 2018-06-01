@@ -8,7 +8,12 @@ class PostsController < ApplicationController
   
   
   def mypage
+     
+     @posts = Post.all
+     
      @mypage = Post.find_by(user_id: current_user.id)
+     
+    # @pages = Post.order(:id).page(params[:page]).per(5)
   end
   
   
@@ -19,19 +24,22 @@ class PostsController < ApplicationController
     
     @posts = Post.all
     
-    @last = Post.last.id
-    random = (1..@last).to_a.sample
+    # @last = Post.last.id
+   
     @posts.each do |p|
-      loop do
-        random =rand(Post.count)
-      
+        # random =rand(Post.count)
+        random = (1..Post.last.id).to_a.sample
+         
         if p.id == random
-           @random = Post.find(random)
+          @random = Post.find(random)
         end
-        break unless @random.nil?
-      end
+        
+        if @random.nil?
+          @random = Post.last
+        end
     end
     
+   
    
   end
 
@@ -44,6 +52,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+
   end
 
   # GET /posts/1/edit
@@ -57,7 +66,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post, notice: '성공적인 메모였습니다.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -160,7 +169,8 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :text)
+      params.require(:post).permit(:title, :text, :lock)
     end
+    
 
 end

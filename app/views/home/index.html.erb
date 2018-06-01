@@ -1,6 +1,9 @@
 <style>
   .index {
-    text-align:center;
+    text-align: center;
+  }
+  .info {
+    text-align: center;
   }
   img {
     width: 35%;
@@ -14,20 +17,43 @@
 
 
 <% if user_signed_in? %>
-<div class = "index">
-  <%= link_to image_tag("/memo.png"), "/posts" , class: "image_button"%>
-
-  
-  <p><%=link_to current_user.email, "/mypage", method: get%>님 환영합니다!</p>
+<div class = "container index">
+  <div class = "row">
+    <div class = "col-12">
+      <%= link_to image_tag("/memo.png"), "/posts" , class: "image_button"%>
+    </div>
+    <div class = "col-3">
+      <%= link_to image_tag("/1.png"), "/posts" , class: "image_button"%>
+    </div>
+    <div class = "col-3">
+      <%= link_to image_tag("/2.png"), "/calender" , class: "image_button"%>
+    </div>
+    <div class = "col-3">
+      <%= link_to image_tag("/8.png"), "/share" , class: "image_button"%>
+    </div>
+    <div class = "col-3">
+      <%= link_to image_tag("/5.png"), "/option" , class: "image_button"%>
+    </div>
+  </div>
+</div>
+<br>
+<div class = "info">
+  <p><%=link_to current_user.email, "/mypage", method: "get"%>님 환영합니다!</p>
     <p><%= link_to "로그아웃", destroy_user_session_path, method: :delete, :class => "btn btn-secondary", data: { confirm: "로그아웃 하시겠습니까?" } %></p>
   
 </div>
     
   <% else %>
   <div class = "index">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
   <%= link_to image_tag("/memo.png"), new_user_session_path , class: "image_button"%>
-
-  
+    <br>
+    <br>
     <p><%= link_to "로그인", new_user_session_path, :class => "btn btn-secondary" %></p>
   
 </div>

@@ -7,9 +7,9 @@
 <p id="notice"><%= notice %></p>
 
 <div align="center"> 
-  <h3><%= @post.title %></h3>
+  <h3 id="title"><%= @post.title %></h3>
 <hr>
-  <h4><%= @post.text %></h4>
+  <h4 id="text"><%= @post.text %></h4>
 <hr>
 <p align="center">
   <% if @ago == 1 %>
@@ -40,5 +40,7 @@
       <%= link_to '뒤로', posts_path, :class => "btn btn-secondary" %>
     </div>
     <% end %>
+    
+
   </div>
 

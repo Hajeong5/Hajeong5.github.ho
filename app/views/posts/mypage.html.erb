@@ -82,15 +82,16 @@
         <th scope="col">제목</th>
       </tr>
     </thead>
-    <tbody><% @mypage.each do |post| %>
+    <tbody><% @posts.each do |post| %>
           
-        
-      <tr>
-        <th scope="row"><%= post.id%></th>
-          
-        <td><%= link_to post.title, post, :class => "btn", style: "color: #333333" %></td>
-        
-      </tr>
+        <%if post.user_id == current_user.id%>
+          <tr>
+            <th scope="row"><%= post.id%></th>
+              
+            <td><%= link_to post.title, post, :class => "btn", style: "color: #333333" %></td>
+            
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
@@ -105,3 +106,4 @@
 
 </div>
 
+<%#= paginate @pages %>

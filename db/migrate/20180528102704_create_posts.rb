@@ -4,7 +4,8 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.references :user, index: true
       t.string :title
       t.text :text
-
+      t.boolean :lock
+      
       t.timestamps
     end
   end
