@@ -1,0 +1,46 @@
+<div class ="container">
+
+<p id="notice"><%= notice %></p>
+
+
+
+      
+      
+     <%if @search.nil?%>
+     
+      <h1 style="color: red; font-size: 40px; font-weight: bold;text-align: center">검색어가 존재하지 않습니다!</h1>
+    <%else%>
+<h1>Search</h1>
+    <table class="table table-sm" style="text-align: center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">제목</th>
+      <th scope="col">편집</th>
+      <th scope="col">삭제</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    
+        <tr>
+          <th scope="row"><%= @search.id%></th>
+
+            <td><%= link_to @search.title , @search, :class => "btn" %></td>
+            
+            <td><%= link_to 'Edit', edit_post_path(@search), :class => "btn" %></td>
+            
+            <td><%= link_to 'Destroy', @search, :class => "btn", method: :delete, data: { confirm: 'Are you sure?' }, style:"color: red" %></td>
+            
+        </tr>
+
+  </tbody>
+  </table>
+
+  <% end %>
+
+</div>
+
+<br>
+
+<%= link_to 'New Post', new_post_path, :class => "btn" %>

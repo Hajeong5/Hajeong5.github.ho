@@ -1,16 +1,45 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :create, :search]
+  skip_before_action :verify_authenticity_token, only: [:search]
 
   # GET /posts
   # GET /posts.json
+  
+  
+  def mypage
+     @mypage = Post.find_by(user_id: current_user.id)
+  end
+  
+  
   def index
+    
+    # @pages = Post.order(:id).page(params[:page])
+    @pages = Post.order(:id).page(params[:page]).per(5)
+    
     @posts = Post.all
+    
+    @last = Post.last.id
+    random = (1..@last).to_a.sample
+    @posts.each do |p|
+      loop do
+        random =rand(Post.count)
+      
+        if p.id == random
+           @random = Post.find(random)
+        end
+        break unless @random.nil?
+      end
+    end
+    
+   
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
   end
+  
 
   # GET /posts/new
   def new
@@ -24,7 +53,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     respond_to do |format|
       if @post.save
@@ -60,15 +89,78 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+    ####################
+  def search
+    @search = Post.find_by(title: params[:search])
+    
+    # if @search.nil?
+    #   redirect_to('/posts', data: { confirm: "로그아웃 하시겠습니까?" })
+    # end
+  
+  end
+  
+ 
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      
+      d = @post.updated_at
+      t = Time.now
+      
+      u_day = d.day
+      u_month = d.month
+      u_year = d.year
+      u_hour = d.hour
+      u_minute = d.min
+      u_second = d.sec
+      
+      t_day = t.day
+      t_month = t.month
+      t_year = t.year
+      t_hour = t.hour
+      t_minute = t.min
+      t_second = t.sec
+      
+      if u_year < t_year && t_month - u_month >= 0
+        @between = t_year - u_year
+        @ago = 1
+      else
+        if u_month < t_month && t_day - u_day >= 0
+          @between = t_month - u_month
+          @ago = 2
+        else
+          if t_day > u_day && t_hour - u_hour >= 0
+            @between = t_day - u_day
+            @ago =3
+          else
+            if t_hour > u_hour && t_minute - u_minute >= 0
+              @between = t_hour - u_hour
+              @ago = 4
+            else
+              if t_minute > u_minute && t_second - u_second >= 0
+                @between = t_minute - u_minute
+                @ago =5
+              else
+                if t_second > u_second
+                  @between = t_day - u_day
+                  @ago =6
+                else
+                  @ago = 0;
+                end
+              end
+            end
+          end
+        end
+      end
+      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :text)
     end
+
 end

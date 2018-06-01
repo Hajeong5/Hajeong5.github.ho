@@ -82,7 +82,7 @@
         <th scope="col">제목</th>
       </tr>
     </thead>
-    <tbody><% @pages.each do |post| %>
+    <tbody><% @mypage.each do |post| %>
           
         
       <tr>
@@ -105,19 +105,3 @@
 
 </div>
 
-<%unless @random.text.nil?%>
-<div class="card text-center" style="border: 0px;">
-  <div class="card-header">
-    당신을 찾아온 글
-  </div>
-  <div class="card-body">
-    
-    <br>
-    
-    <p class="card-text"><%= @random.text.slice!(10..-1) %></p>
-    <br>
-    <%=link_to "메모보기", @random, class: "btn btn-primary"%>
-  </div>
-</div>
-<% end %>
-<%= paginate @pages %>

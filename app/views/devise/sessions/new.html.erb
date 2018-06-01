@@ -1,0 +1,40 @@
+<br>
+<br>
+<p id="notice"><%= notice %></p>
+
+<div class="col-md-3" style = "padding: 0 30%">
+<div class="card" style="width: 500px; height: 500px;">
+  <div class="col-md-8 offset-md-3">
+    <br>
+    <br>
+  <h1>지정석메모</h1>
+  <!--<img src ="/memo.png"></img>-->
+  <div class="card-body">
+  </div>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-group">
+    <div class="form-row col-md-10">
+      <label for="inputEmail4">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="Email을 입력하세요" name="user[email]">
+    </div>
+    <%#= f.input :email, required: false, autofocus: true, class: "form-control", id: "inputEmail4" %>
+  <br>
+  <div class="form-group col-md-10">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="user[password]">
+    </div>
+    <%#= f.input :password, required: false %>
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-actions">
+    
+    <%= f.button :submit, "Log in" %>
+  </div>
+<% end %>
+<%= render "devise/shared/links" %>
+<br>
+<br>
+</div>
+

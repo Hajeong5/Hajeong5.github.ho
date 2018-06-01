@@ -1,14 +1,44 @@
+<style>
+  div{
+    padding: 30px;
+  }
+</style>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
+<div align="center"> 
+  <h3><%= @post.title %></h3>
+<hr>
+  <h4><%= @post.text %></h4>
+<hr>
+<p align="center">
+  <% if @ago == 1 %>
+    <%= @between %>년 전
+  <% elsif @ago == 2 %>
+    <%= @between %>달 전
+  <% elsif @ago == 3%>
+    <%= @between %>일 전
+  <% elsif @ago == 4%>
+    <%= @between %>시간 전
+  <% elsif @ago == 5%>
+    <%= @between %>분 전
+  <% elsif @ago == 6%>
+    <%= @between %>초 전
+    <% else %>
+  <% end %>
 </p>
+</div>
+  <div align="center">
+    <% if current_user == @post.user %>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <%= link_to '수정', edit_post_path(@post), :class => "btn btn-secondary" %>
+      <%= link_to '뒤로', posts_path, :class => "btn btn-secondary" %>
+      <%= link_to '삭제', post_path, :class => "btn btn-danger", method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } %>
+    </div>
+    <% else %>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <%= link_to '뒤로', posts_path, :class => "btn btn-secondary" %>
+    </div>
+    <% end %>
+  </div>
 
-<p>
-  <strong>Text:</strong>
-  <%= @post.text %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post), :class => "btn btn-secondary" %>
-<%= link_to 'Back', posts_path, :class => "btn btn-secondary" %>

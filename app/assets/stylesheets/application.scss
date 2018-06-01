@@ -13,3 +13,45 @@
  *= require_tree .
  *= require_self
  */
+ 
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+/* 나눔고딕 */
+/* 나눔명조 */
+/* 나눔고딕코딩 */
+/* 나눔손글씨 붓 */
+/* 나눔손글씨 펜 */
+/* 제주고딕 */
+/* 제주한라산 */
+/* 제주명조 */
+/* 한나체 */
+/* KoPub바탕 */
+/* Noto Sans KOR */
+
+a {
+    font-family: jejumyeongjo;
+    font-weight: 200;
+}
+
+p {
+    font-family: jejugothic;
+}
+
+table {
+    font-family: jejumyeongjo;
+    font-weight: 200;
+}
+
+body {
+    background-image: url(".../winter-landscape-251788_1920.jpg");
+  }
